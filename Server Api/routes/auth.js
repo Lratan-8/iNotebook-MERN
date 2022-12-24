@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const createUser = require('../controllers/usersController'); //this is our controller function
+const createUser = require('../controllers/authenticationControllers/createUserController') //this is our controller function
 
 
 //this is the handler function for the route
