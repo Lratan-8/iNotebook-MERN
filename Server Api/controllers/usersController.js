@@ -1,7 +1,9 @@
 const express = require('express');
 const User = require('../models/User');
 const { body, validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs');const jwt = require('jsonwebtoken');
+const JWT_SECRET = "LUVRATAN";
+
 
 
 //controller function, which will be a callback function in the router
@@ -38,7 +40,17 @@ const createUser = async (req, res) => {
             password: secPass
         });
 
-        res.json(user);
+
+        const data = {
+            user:{
+                id: user.id
+            }
+        }
+        const jwtAuthToken = jwt.sign(data, JWT_SECRET);
+       res.json({jwtAuthToken});
+
+
+        // res.json(user);
     } catch (error) {
         console.log(error.message);
         res.status(500).send("Some error occured")
