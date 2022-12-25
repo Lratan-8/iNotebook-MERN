@@ -1,8 +1,9 @@
 const express = require('express');
 const User = require('../../models/User');
 const { body, validationResult } = require('express-validator');
-const bcrypt = require('bcryptjs');const jwt = require('jsonwebtoken');
-const JWT_SECRET = "LUVRATAN";
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = "something999";
 
 
 
@@ -40,14 +41,15 @@ const createUser = async (req, res) => {
             password: secPass
         });
 
-
+        //the json webtoken required three parts to create a string- Headers, payload, signature
+        //headers are already present in the jwt.sign so we will add payload and signature
         const data = {
             user:{
                 id: user.id
             }
         }
         const jwtAuthToken = jwt.sign(data, JWT_SECRET);
-       res.json({jwtAuthToken});
+       res.json({jwtAuthToken}); //since I'm using es6
 
 
         // res.json(user);
@@ -67,4 +69,7 @@ const createUser = async (req, res) => {
 
 };
 
-module.exports = createUser;
+// module.exports = createUser;
+module.exports = {JWT_SECRET, createUser};  //we are exporting JWT secret key and create user function so that jwt secret key is available everywhere and create user is available in the router
+
+

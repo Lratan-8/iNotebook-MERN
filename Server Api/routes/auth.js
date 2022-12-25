@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const createUser = require('../controllers/authenticationControllers/createUserController') //this is our controller function
+const createUser = require('../controllers/authenticationControllers/createUserController').createUser; //this is our create user controller function
+const loginAuthentication = require('../controllers/authenticationControllers/loginAuthentication'); //this is our login user controller function
+const fetchUser = require('../middlewares/fetchUser');
 
 
 //this is the handler function for the route
@@ -13,6 +15,7 @@ const createUser = require('../controllers/authenticationControllers/createUserC
 // });
 
 
+//ROUTE 1
 //this route can be removed later
 router.get('/', (req, res) => {
 
@@ -25,12 +28,11 @@ router.get('/', (req, res) => {
 
 });
 
-
-
 //we will create a user now.
-
 //create a User using : POST "/api/auth/create"   -//doesn't require auth, that means user do not have to be logged in to access this end point
-//route and controller to create a new user
+//router and controller to create a new user
+
+//ROUTE 2
 router.post('/createuser',
   //to validate our items from the request, we will make an array of validators between route and callback function
   //these validator functions are coming from express-validators
@@ -38,7 +40,23 @@ router.post('/createuser',
     body('email', "Enter a valid email").isEmail(),
     body('password').isLength({ min: 5 }),
     body('name').isLength({ min: 3 })
-  ], createUser);
+  ], 
+  createUser
+);
+
+//ROUTE 3
+//router and controller to authenticate user logging in
+router.post('/login',
+  [
+    body('email', "Enter a valid email").isEmail(),
+    body('password',"Password cannot be blank").exists()
+  ], 
+  loginAuthentication.login
+);
+
+//ROUTE 4
+//Decoding logged in user details from the JWT so that the server can give back the right information
+router.post('/getUserDetails',fetchUser, loginAuthentication.getUserDetails);
 
 
 
