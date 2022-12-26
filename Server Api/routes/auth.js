@@ -45,8 +45,8 @@ router.post('/createuser',
 );
 
 //ROUTE 3
-//router and controller to authenticate user logging in
-router.post('/login',
+//router and controller to authenticate user logging in  - Login not required
+router.post('/login', 
   [
     body('email', "Enter a valid email").isEmail(),
     body('password',"Password cannot be blank").exists()
@@ -55,7 +55,7 @@ router.post('/login',
 );
 
 //ROUTE 4
-//Decoding logged in user details from the JWT so that the server can give back the right information
+//Decoding logged in user details from the JWT so that the server can give back the right information - Login middle
 router.post('/getUserDetails',fetchUser, getUserDetails);
 
 
