@@ -17,7 +17,7 @@ router.post('/addnote', fetchUser, [
 //Route 3 - Update an existing note in the database
 router.put('/updatenote/:id', fetchUser ,updateNote);
 
-//Router 4 - Delete a note from the database
+//Router 4 - Delete an existing note from the database
 router.delete('/deletenote/:id', fetchUser, deleteNote);
 
 

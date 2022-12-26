@@ -14,7 +14,7 @@ const fetchUser = (req, res, next) => {
         next(); //the next function in the argument where this middleware is called will be called with this next()
 
     } catch (error) {
-        res.status(401).send({ error: "error" })
+        res.status(401).send({ error: "Please authenticate using a valid token" })
     }
 }
 
