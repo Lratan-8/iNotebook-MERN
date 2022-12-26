@@ -38,7 +38,7 @@ const addnote = async (req, res) => {
         console.log(error.message);
         res.status(500).send("Internal Server Error")
     }
-}
+};
 
 
 //controller function 3 - To update an existing note
@@ -75,6 +75,13 @@ const updateNote = async (req, res) =>{
         console.log(error.message);
         res.status(500).send("Internal Server Error")
     }
+};
+
+
+//controller function 4 : Deleting a note
+
+const deleteNote = async (req,res) =>{
+
 }
 
-module.exports = { fetchallnotes, addnote, updateNote  };
+module.exports = { fetchallnotes, addnote, updateNote, deleteNote};
