@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
-const createUser = require('../controllers/authenticationControllers/createUserController').createUser; //this is our create user controller function
-const loginAuthentication = require('../controllers/authenticationControllers/loginAuthentication'); //this is our login user controller function
+const createUser = require('../controllers/authenticationControllers/createUserController').createUser; //this is our create user controller function 
+const {login, getUserDetails} = require('../controllers/authenticationControllers/loginAuthentication'); //this is our login user controller function and we have used object desctructuring to get these functions
 const fetchUser = require('../middlewares/fetchUser');
 
 
@@ -51,12 +51,12 @@ router.post('/login',
     body('email', "Enter a valid email").isEmail(),
     body('password',"Password cannot be blank").exists()
   ], 
-  loginAuthentication.login
+  login
 );
 
 //ROUTE 4
 //Decoding logged in user details from the JWT so that the server can give back the right information
-router.post('/getUserDetails',fetchUser, loginAuthentication.getUserDetails);
+router.post('/getUserDetails',fetchUser, getUserDetails);
 
 
 

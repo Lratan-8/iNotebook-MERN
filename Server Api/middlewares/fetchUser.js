@@ -9,10 +9,8 @@ const fetchUser = (req, res, next) => {
         res.status(401).send({ error: "Please authenticate using a valid token" })
     }
     try {
-        console.log("check")
         const data = jwt.verify(token, JWT_SECRET);
         req.user = data.user;
-        
         next(); //the next function in the argument where this middleware is called will be called with this next()
 
     } catch (error) {
