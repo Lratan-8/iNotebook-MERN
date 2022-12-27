@@ -1,7 +1,5 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
 const Notes = require('../models/Notes');
-const { JWT_SECRET } = require('./authenticationControllers/createUserController');
 const { body, validationResult } = require('express-validator');
 
 
