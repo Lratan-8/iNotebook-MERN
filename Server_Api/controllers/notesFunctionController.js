@@ -8,7 +8,7 @@ const fetchallnotes = async (req, res) => {
 
     try {
         const notes = await Notes.find({ user: req.user.id });
-        res.json([notes]);
+        res.json(notes);
     } catch (error) {
         console.log(error.message);
         res.status(500).send("Internal Server Error")
