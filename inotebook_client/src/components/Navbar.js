@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useEffect} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -13,7 +13,6 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import './navbar.css'
-
 import { Link } from "react-router-dom";
 
 
@@ -27,8 +26,8 @@ const pages = [
     route: '/about'
   },
   {
-    text: "Login",
-    route: '/login'
+    text: "Sign Up",
+    route: '/signup'
   },
 ]
 // const pages = ['Products', 'Pricing', 'Blog'];
@@ -54,7 +53,7 @@ function ResponsiveAppBar() {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />

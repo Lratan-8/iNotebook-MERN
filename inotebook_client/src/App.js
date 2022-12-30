@@ -4,17 +4,32 @@ import { Route, Routes } from "react-router-dom";
 import ResponsiveAppBar from './components/Navbar';
 import About from './pages/About';
 import NoteState from './context/notes/NoteState';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import SignUp from './pages/Signup';
 
 function App() {
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+
   return (
+
     <NoteState>
-      <div className="App">
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
         <ResponsiveAppBar />
-        <Routes>
-          <Route exact path='/' element={<Home />} />
-          <Route exact path='about' element={<About />} />
-        </Routes>
-      </div>
+        <div className="App">
+          <Routes>
+            <Route exact path='/' element={<Home />} />
+            <Route exact path='/about' element={<About />} />
+            <Route exact path='/signup' element={<SignUp />} />
+          </Routes>
+        </div>
+      </ThemeProvider>
     </NoteState>
   );
 }

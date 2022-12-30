@@ -8,6 +8,7 @@ export default function About() {
   useEffect(() => {
     a.update();
   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   return (
     <div>This is about {a.first.name} and is - {a.first.age}</div>
