@@ -28,7 +28,7 @@ const pages = [
   {
     text: "Sign Up",
     route: '/signup'
-  },
+  }
 ]
 // const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
