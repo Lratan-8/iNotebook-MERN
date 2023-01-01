@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import noteContext from '../context/notes/noteContext'
+import NotesCard from './NotesCard';
 
 export default function MyNotes() {
-  return (
-    <div>MyNotes</div>
-  )
+    const value = useContext(noteContext);
+    return (
+        <div style={{ width: '90%', display: 'flex', flexDirection: 'row', marginTop: '20px', paddingBottom: '50px', boxSizing: 'border-box', flexWrap: 'wrap'}}>{
+            
+            value.map((note)=>{
+            return <NotesCard value={note}/>
+        })} 
+        
+        
+        </div>
+    )
 }

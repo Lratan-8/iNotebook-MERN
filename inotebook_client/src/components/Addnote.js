@@ -17,7 +17,7 @@ export default function AddNote() {
     }
   return (
     <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
-    <Card component='form' onSubmit={handleSubmit}  style={{width: '70%', boxSizing: 'borderbox', padding: '5%', paddingTop: '0%'}} >
+    <Card component='form' onSubmit={handleSubmit}  style={{width: '90%', boxSizing: 'borderbox', padding: '5%', paddingTop: '0%'}} >
         <h4>Add a new note</h4>
         <TextField 
         name='title'
