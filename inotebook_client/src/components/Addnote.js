@@ -1,19 +1,19 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Card from '@mui/material/Card';
 import TextField from '@mui/material/TextField';
 import { Button } from '@mui/material';
+import noteContext from '../context/notes/noteContext';
 
 
 export default function AddNote() {
+
+  const context = useContext(noteContext)
+  const {addNote} = context;
   
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
-          title: data.get('title'),
-          tags: data.get('tags'),
-          description: data.get('description'),
-        });
+        addNote(data.get('title'), data.get('tags'), data.get('description'));
     }
   return (
     <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
