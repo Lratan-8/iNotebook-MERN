@@ -13,7 +13,8 @@ export default function AddNote() {
     const handleSubmit = async (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        addNote(data.get('title'), data.get('tags'), data.get('description'));
+        await addNote(data.get('title'), data.get('description'), data.get('tags'));
+       
     }
   return (
     <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>

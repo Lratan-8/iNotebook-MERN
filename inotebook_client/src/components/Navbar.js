@@ -14,6 +14,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import './navbar.css'
 import { Link } from "react-router-dom";
+import Switches from './Switches';
 
 
 const pages = [
@@ -105,8 +106,8 @@ function ResponsiveAppBar() {
               }}
             >
               {pages.map((item) => (
-                <Link to={item.route}>
-                  <MenuItem key={item.text} onClick={handleCloseNavMenu}>
+                <Link to={item.route} key={item.text}>
+                  <MenuItem  onClick={handleCloseNavMenu}>
                     <Typography textAlign="center">{item.text}</Typography>
                   </MenuItem>
                 </Link>
@@ -135,9 +136,9 @@ function ResponsiveAppBar() {
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((page) => (
-              <Link to={page.route}>
+              <Link key={page.text} to={page.route}>
               <Button
-                key={page.text}
+                
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
@@ -146,6 +147,7 @@ function ResponsiveAppBar() {
               </Link>
             ))}
           </Box>
+          <Switches/>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
