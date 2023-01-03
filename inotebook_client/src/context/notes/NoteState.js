@@ -1,4 +1,5 @@
 import React, { useState,useEffect } from 'react';
+import { useNavigate } from 'react-router';
 import NoteContext from './noteContext'
 
 const NoteState = (props) => {
@@ -102,6 +103,8 @@ const NoteState = (props) => {
       }
     }
   }
+
+ 
 
 
   return (

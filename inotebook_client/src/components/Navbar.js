@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
@@ -15,7 +14,9 @@ import AdbIcon from '@mui/icons-material/Adb';
 import './navbar.css'
 import { Link } from "react-router-dom";
 import Switches from './Switches';
-
+import LogoutIcon from '@mui/icons-material/Logout';
+import noteContext from '../context/notes/noteContext';
+import { useNavigate } from 'react-router-dom';
 
 const pages = [
   {
@@ -33,6 +34,17 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const context = useContext(noteContext);
+  const {setAuthToken} = context;
+
+   //to handle logout
+
+   const navigate = useNavigate();
+   const logout = () =>{
+     setAuthToken('');
+     localStorage.setItem('token' , '');
+     navigate('/')
+   }
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -142,8 +154,14 @@ function ResponsiveAppBar() {
               </Link>
             ))}
           </Box>
+              
           <Switches/>
 
+          {(localStorage.getItem('token')) &&  
+          <Tooltip title='Logout'>
+            <LogoutIcon onClick={logout} style={{cursor: 'pointer'}}/>
+          </Tooltip>
+          }
           <Box sx={{ flexGrow: 0 }}>
         
             {/* <Tooltip title="Open settings">

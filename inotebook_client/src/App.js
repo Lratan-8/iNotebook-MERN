@@ -10,6 +10,7 @@ import { useContext} from 'react';
 import noteContext from './context/notes/noteContext';
 import Login from './pages/Login';
 import themeContext from './context/themes/themeContext';
+import LoginLogout from './components/LoginLogout';
 
 
 function App() {
@@ -41,8 +42,13 @@ function App() {
       <ResponsiveAppBar />
       <div className="App">
         <Routes>
+          
           {
             (authToken) && <Route exact path='/' element={<Home />} />
+          }
+          {
+            (!authToken) && 
+            <Route exact path='/' element={<LoginLogout/>} />
           }
           {
             (!authToken) && 
