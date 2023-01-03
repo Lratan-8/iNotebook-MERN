@@ -1,5 +1,4 @@
 import React, { useState,useEffect } from 'react';
-import { useNavigate } from 'react-router';
 import NoteContext from './noteContext'
 
 const NoteState = (props) => {
@@ -21,6 +20,7 @@ const NoteState = (props) => {
   }else if(authToken){
     setAuthToken(authToken);
   }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   },[])
 
   //function to set if the user is logged in or note(that means if it has a jwt token or not)
@@ -92,8 +92,8 @@ const NoteState = (props) => {
       },
       body: JSON.stringify({ title, description, tags })
     });
-    const json = await response.json()
-    //login to edit in client
+    console.log(response)
+    // to edit in client
     for (let index = 0; index < notes.length; index++) {
       const element = notes[index];
       if (element._id === id) {
@@ -103,10 +103,6 @@ const NoteState = (props) => {
       }
     }
   }
-
- 
-
-
   return (
     <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes, authToken, setAuthToken}}>
       {props.children}
