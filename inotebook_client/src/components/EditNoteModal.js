@@ -49,7 +49,7 @@ export default function EditNoteModal(props) {
     }
     let id = noteDetails._id
     await editNote(title, description, tags, id);
-    
+  
     handleEditModal();
   }
 

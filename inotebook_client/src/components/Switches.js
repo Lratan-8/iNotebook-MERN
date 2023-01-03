@@ -3,7 +3,7 @@ import { styled } from '@mui/material/styles';
 import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Switch from '@mui/material/Switch';
-import noteContext from '../context/notes/noteContext';
+import themeContext from '../context/themes/themeContext';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
@@ -56,7 +56,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 
 
 export default function Switches() {
-  const context = useContext(noteContext);
+  const context = useContext(themeContext);
   const {handleTheme} = context;
   return (
     <FormGroup>

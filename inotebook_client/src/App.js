@@ -6,12 +6,16 @@ import About from './pages/About';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import SignUp from './pages/Signup';
-import { useContext,useEffect } from 'react';
+import { useContext, useState } from 'react';
 import noteContext from './context/notes/noteContext';
+import Login from './pages/Login';
+import { ThemeContext } from '@emotion/react';
+import themeContext from './context/themes/themeContext';
 
 function App() {
 
-  const context = useContext(noteContext);
+  //handling dark and light mode theme
+  const context = useContext(themeContext);
   const{mode} = context;
 
   const darkTheme = createTheme({
@@ -20,16 +24,34 @@ function App() {
     },
   });
 
+  //handling logged in
+  const [loggedIn, setloggedIn] = useState(false);
+
+  const handleLoggedIn = () =>{
+
+  }
+
+
+
+  
+
   return (
 
 
-
+    
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <ResponsiveAppBar />
       <div className="App">
         <Routes>
-          <Route exact path='/' element={<Home />} />
+          {
+            (loggedIn) && <Route exact path='/' element={<Home />} />
+          }
+          {
+            (!loggedIn) && 
+            <Route exact path='/' element={<Login/>} />
+          }
+          
           <Route exact path='/about' element={<About />} />
           <Route exact path='/signup' element={<SignUp />} />
         </Routes>

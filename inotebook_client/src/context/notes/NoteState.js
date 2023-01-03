@@ -3,15 +3,7 @@ import NoteContext from './noteContext'
 
 const NoteState = (props) => {
 
-  const [mode, setmode] = useState('dark');
-
-  const handleTheme = () => {
-    if (mode === 'dark') {
-      setmode('light')
-    } else {
-      setmode('dark')
-    }
-  }
+  
 
   const host = 'http://localhost:5000'
 
@@ -99,7 +91,7 @@ const NoteState = (props) => {
 
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes, mode, handleTheme }}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes}}>
       {props.children}
     </NoteContext.Provider>
   )
