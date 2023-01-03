@@ -8,8 +8,12 @@ const NoteState = (props) => {
   const host = 'http://localhost:5000'
 
   const notesInitial = [];
-
   const [notes, setNotes] = useState(notesInitial);
+
+  const [authToken, setAuthToken] = useState('')
+
+  //function to set if the user is logged in or note(that means if it has a jwt token or not)
+
 
 
   //function to fetch all notes from the server
@@ -91,7 +95,7 @@ const NoteState = (props) => {
 
 
   return (
-    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes}}>
+    <NoteContext.Provider value={{ notes, addNote, deleteNote, editNote, getNotes, authToken, setAuthToken}}>
       {props.children}
     </NoteContext.Provider>
   )
