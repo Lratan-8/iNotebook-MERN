@@ -27,7 +27,10 @@ export default function EditNoteModal(props) {
 
   const { open, handleEditModal, noteDetails } = props.value;
   const handleSubmit = async (event) => {
-    let title,tags,description
+
+
+    let jwt = localStorage.getItem('token');
+    let title,tags,description;
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     if(data.get('title').length !==0){
@@ -48,7 +51,7 @@ export default function EditNoteModal(props) {
       description = noteDetails.description
     }
     let id = noteDetails._id
-    await editNote(title, description, tags, id);
+    await editNote(title, description, tags, id, jwt);
   
     handleEditModal();
   }

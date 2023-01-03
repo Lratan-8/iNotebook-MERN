@@ -11,7 +11,7 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import noteContext from '../context/notes/noteContext';
 
 
@@ -22,6 +22,7 @@ export default function Login() {
     const context = useContext(noteContext);
     const {setAuthToken} = context;
 
+    const navigate = useNavigate();
 
 
   const handleSubmit = async (event) => {
@@ -39,8 +40,14 @@ export default function Login() {
         body: JSON.stringify({email, password})
       });
       const json = await response.json();
-      console.log(json);
-      setAuthToken(json);
+      console.log(json)
+      if(json.success=== true){
+        console.log(json.success)
+        localStorage.setItem('token',json.jwtAuthToken)    
+        setAuthToken(json);
+        navigate('/')
+      };
+      
   };
 
   return (
@@ -101,7 +108,7 @@ export default function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link to="signup" variant="body2" style={{color: 'grey'}}>
+                <Link to="/signup" variant="body2" style={{color: 'grey'}}>
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

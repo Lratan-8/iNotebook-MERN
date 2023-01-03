@@ -10,6 +10,8 @@ const JWT_SECRET = "something999";
 //controller function, which will be a callback function in the router
 const createUser = async (req, res) => {
 
+    let success;
+
     //if there are errors, return bad request and the errors
     // Finds the validation errors in this request and wraps them in an object with handy functions
     const errors = validationResult(req);
@@ -25,7 +27,8 @@ const createUser = async (req, res) => {
     try {
         let user = await User.findOne({ email: req.body.email });
         if (user) {
-            return res.status(400).json({ error: "sorry a user with this email already exists" });
+            success = false;
+            return res.status(400).json({ error: "sorry a user with this email already exists" , success});
         }
 
         //adding password encryption
@@ -48,8 +51,9 @@ const createUser = async (req, res) => {
                 id: user.id
             }
         }
+        success = true;
         const jwtAuthToken = jwt.sign(data, JWT_SECRET);
-       res.json({jwtAuthToken}); //since I'm using es6
+       res.json({jwtAuthToken, success}); //since I'm using es6
 
 
         // res.json(user);

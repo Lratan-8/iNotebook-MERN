@@ -15,10 +15,19 @@ import themeContext from './context/themes/themeContext';
 function App() {
 
   //handling dark and light mode theme
+  
   const tContext = useContext(themeContext);
   const nContext = useContext(noteContext);
+  const jwt = nContext.authToken
+  let authToken;
+  if(localStorage.getItem('token')){
+    authToken = localStorage.getItem('token');
+  }else if(jwt){
+    authToken = jwt;
+  }
+  
   const{mode} = tContext;
-  const{authToken} = nContext
+ 
 
   const darkTheme = createTheme({
     palette: {
@@ -37,12 +46,18 @@ function App() {
           }
           {
             (!authToken) && 
-            <Route exact path='/' element={<Login/>} />
+            <Route exact path='/login' element={<Login/>} />
           }
           
           <Route exact path='/about' element={<About />} />
-          <Route exact path='/signup' element={<SignUp />} />
-        </Routes>
+          {(!authToken) &&
+            <Route exact path='/signup' element={<SignUp />} />
+          }
+          {
+            (authToken) &&
+            <Route exact path='/signup' element={<Home/>} />
+          }
+          </Routes>
       </div>
     </ThemeProvider>
 

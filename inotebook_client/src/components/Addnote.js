@@ -11,10 +11,11 @@ export default function AddNote() {
   const {addNote} = context;
   
     const handleSubmit = async (event) => {
+        let jwt = localStorage.getItem('token')
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        await addNote(data.get('title'), data.get('description'), data.get('tags'));
-       
+        console.log(data.get('title'), data.get('description'), data.get('tags'), jwt)
+        await addNote(data.get('title'), data.get('description'), data.get('tags'), jwt);
     }
   return (
     <div style={{display: 'flex', width: '100%', justifyContent: 'center'}}>
